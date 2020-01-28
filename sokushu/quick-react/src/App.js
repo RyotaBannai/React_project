@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 // 以前のバーションだとComponent classから継承（extends）してコンポーネントを作成。現在のバージョンでは functoin <component_name> でok. 
-// つまり、import React, {Component} from 'react';の Componentは不要。
+// つまり、import React, {Component} from 'react';の 個別メンバー Componentは不要。
 // render method も必要ない。そのかわりdomをreturn。
 // コンポーネント名はPascal形式でhtmlタグを区別するため。
 
@@ -13,6 +13,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+				//から要素は〜/>で終える
         <img src={logo} className="App-logo" alt="logo" />
 				<h1 className="App-title">Reactへようこそ！</h1>
         <p>
