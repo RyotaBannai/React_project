@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-				//から要素は〜/>で終える
+				{/*コメントはこうする。空要素は〜/>で終える*/}
         <img src={logo} className="App-logo" alt="logo" />
 				<h1 className="App-title">Reactへようこそ！</h1>
         <p>
