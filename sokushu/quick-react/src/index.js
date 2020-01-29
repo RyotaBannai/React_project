@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import MyHello2 from './App';
-import MyBook from './MyBook';
+//import MyHello from './MyHello';
+//import MyBook from './MyBook';
+import MyTypes, {Member} from './MyTypes';
 import * as serviceWorker from './serviceWorker';
 
 // <App />にhtmlで作ったdomを埋め込んでもok
@@ -31,7 +32,16 @@ const book = {
 	price: 454,
 	published: 'WINGSプロジェクト'
 };
-
+ReactDOM.render(
+	//<MyTypes prop1={new Member()}/>, 
+	<MyTypes prop1="Hi"/>, 
+	document.getElementById('root'));
+serviceWorker.unregister();
+/*
+ReactDOM.render(
+	<MyHello />, document.getElementById('root'));
+serviceWorker.unregister();
+*/
 //ReactDOM.render(<App name="Bannai"/>,
 //ReactDOM.render(<App {...data}/>, document.getElementById('root'));
 /*
@@ -41,8 +51,8 @@ ReactDOM.render(
 	</MyHello2>, document.getElementById('root'));
 serviceWorker.unregister();
 */
-
+/*
 ReactDOM.render(
 	<MyBook info={book} />, document.getElementById('root'));
-	
+*/
 serviceWorker.unregister();

@@ -28,22 +28,6 @@ const style = {color:'red', backgroundColor: 'yellow'};
 	Parsing error: Only one default export allowed per module.
 */
 
-//export default class MyHello extends Component{
-class MyHello extends Component{
-	render(){
-		return (<div>Hello! {this.props.name}さん！</div>);
-	}
-}
-//export default MyHello;
-
-class MyHello2 extends Component{
-	render(){
-		return (<div>Hello! {this.props.children}さん！</div>);
-	}
-}
-export default MyHello2;
-
-
 function App(props) {
   return (
     <div className="App">
@@ -72,4 +56,4 @@ function App(props) {
   );
 }
 
-//export default App;
+export default App;
