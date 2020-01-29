@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import MyHello2 from './App';
+import MyBook from './MyBook';
 import * as serviceWorker from './serviceWorker';
 
 // <App />にhtmlで作ったdomを埋め込んでもok
@@ -24,15 +25,24 @@ const data = {
 	weather: '晴',
 };
 
+const book = {
+	isbn: 'WGS-JST-001',
+	title: '速習',
+	price: 454,
+	published: 'WINGSプロジェクト'
+};
+
 //ReactDOM.render(<App name="Bannai"/>,
 //ReactDOM.render(<App {...data}/>, document.getElementById('root'));
+/*
 ReactDOM.render(
 	<MyHello2>
 		<b>Childrenのテキスト！</b>
-		{/*Reactコンポーネント、タグもchildreとして利用できる。*/}
 	</MyHello2>, document.getElementById('root'));
+serviceWorker.unregister();
+*/
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+ReactDOM.render(
+	<MyBook info={book} />, document.getElementById('root'));
+	
 serviceWorker.unregister();
