@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 //import MyHello from './MyHello';
 //import MyBook from './MyBook';
-import MyTypes, {Member} from './MyTypes';
-import MyTypes2 from './MyTypes2';
+//import MyTypes, {Member} from './MyTypes';
+//import MyTypes2 from './MyTypes2';
+import MyArticle from './MyArticle';
 import * as serviceWorker from './serviceWorker';
 
 // <App />にhtmlで作ったdomを埋め込んでもok
@@ -20,7 +21,7 @@ import * as serviceWorker from './serviceWorker';
 
 //jsx内では文字列はエスケープされる。 <p>dangerouslySetInnerHTML={{__html: str}}></p><p></p>でhtml tag 表示。
 
-//一度にたくさんのパラメータを渡す。「...」演算子を利用
+//「...」演算子：一度にたくさんのパラメータを、「展開して」渡す（「data」と指定せずに利用）。
 const data = {
 	name: 'Bannai',
 	today: Date(),
@@ -33,6 +34,35 @@ const book = {
 	price: 454,
 	published: 'WINGSプロジェクト'
 };
+
+const articles =[
+	{
+		id:0,
+		url: 'https://www.atmarkit.co.jp/ait/series/9383',
+		title: 'Angular TIPS',
+		description: '人気のJavaScript...',
+		isNew:true
+	},
+	{
+		id:1,
+		url: 'https://www.atmarkit.co.jp/ait/series/9383',
+		title: 'Angular TIPS',
+		description: '人気のJavaScript...',
+		isNew:true
+	}
+];
+
+//component に配列articlesをmapする. mapメゾット（コールバック関数）の戻り値を利用.
+//componentを利用しない場合はReact.Fragmentにkeyを指定することもできる.
+//テンプレートに直接埋め込んでもいいし、ロジックを変数として切り出してもいい.
+const list = articles.map((article)=>
+		<MyArticle {...article} key={article.id}/>
+	);
+ReactDOM.render(
+	<dl>{list}</dl>,
+	document.getElementById('root')
+);
+
 /*
 ReactDOM.render(
 	//<MyTypes prop1={new Member()}/>, 
@@ -43,18 +73,19 @@ serviceWorker.unregister();
 
 
 //オブジェクトを渡して、PropTypes.shapeで型指定をする。
-ReactDOM.render(
+/*ReactDOM.render(
 	//<MyTypes prop1={new Member()}/>, 
 	<MyTypes2 />, //This causes error in console.
 	document.getElementById('root'));
 serviceWorker.unregister();
-
+*/
 
 /*
 ReactDOM.render(
 	<MyHello />, document.getElementById('root'));
 serviceWorker.unregister();
 */
+
 //ReactDOM.render(<App name="Bannai"/>,
 //ReactDOM.render(<App {...data}/>, document.getElementById('root'));
 /*

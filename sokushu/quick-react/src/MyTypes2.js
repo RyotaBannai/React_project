@@ -13,13 +13,14 @@ export default class MyTypes2 extends Component{
 	
 	render(){
 		return (
-			<div>
+		{/*二つ以上の要素を括るダミー要素*/}
+			<React.Fragment>
 				<p> >>渡されたpropsは以下の通りです.</p>
 				<ul>
 					<li>{this.props.obj.name}</li>
 					<li>{this.props.obj.born}</li>
 				</ul>
-			</div>
+			</React.Fragment>
 		)
 	}
 }
