@@ -12,3 +12,8 @@ MyHello.propTypes = {
 	prop1: PropTypes.instanceOf(Member),
 }; 
 export default MyHello;
+
+// Specifies the default values for props:
+MyHello.defaultProps = {
+	prop1: new Member()
+}
