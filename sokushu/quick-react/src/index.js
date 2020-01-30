@@ -6,7 +6,9 @@ import './index.css';
 //import MyTypes, {Member} from './MyTypes';
 //import MyTypes2 from './MyTypes2';
 //import MyArticle from './MyArticle';
-import MyEvent from './MyEvent';
+//import MyEvent from './MyEvent';
+//import MyPool from './MyPool';
+import MyState from './MyState';
 import * as serviceWorker from './serviceWorker';
 
 // <App />にhtmlで作ったdomを埋め込んでもok
@@ -99,8 +101,13 @@ ReactDOM.render(
 	<MyBook info={book} />, document.getElementById('root'));
 */
 
+/*
 ReactDOM.render(
-	<MyEvent greet="Hello" />, 
+	<MyPool greet="Hello" />, 
 	document.getElementById('root'));
+*/
+ReactDOM.render(
+		<MyState />, 
+		document.getElementById('root'));
 	
 serviceWorker.unregister();
