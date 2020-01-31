@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 //フォームからデータを入力して、そのデータをstateに反映.
-//それから、そのstateの値をsonsoleへ叩き出す.
+//それから、そのstateの値をconsoleへ叩き出す.
 
 export default class MyForm extends Component{	
 	
