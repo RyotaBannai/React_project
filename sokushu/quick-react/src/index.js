@@ -8,8 +8,9 @@ import './index.css';
 //import MyArticle from './MyArticle';
 //import MyEvent from './MyEvent';
 //import MyPool from './MyPool';
-import MyState from './MyState';
-import MyParent from './MyParent';
+//import MyState from './MyState';
+//import MyParent from './MyParent';
+import MyForm from './MyForm';
 import * as serviceWorker from './serviceWorker';
 
 // <App />にhtmlで作ったdomを埋め込んでもok
@@ -112,9 +113,14 @@ ReactDOM.render(
 		<MyState />, 
 		document.getElementById('root'));
 */
-
+/*
 ReactDOM.render(
 		<MyParent />, 
 		document.getElementById('root'));
+*/
+ReactDOM.render(
+		<MyForm />, 
+		document.getElementById('root'));	
+
 		
 serviceWorker.unregister();
