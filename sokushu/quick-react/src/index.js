@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import App from './App';
 //import MyHello from './MyHello';
 //import MyBook from './MyBook';
 //import MyTypes, {Member} from './MyTypes';
@@ -8,10 +9,13 @@ import './index.css';
 //import MyArticle from './MyArticle';
 //import MyEvent from './MyEvent';
 //import MyPool from './MyPool';
-import MyState from './MyState';
+//import MyState from './MyState';
 //import MyParent from './MyParent';
 import MyForm from './MyForm';
 import * as serviceWorker from './serviceWorker';
+
+ReactDOM.render(
+	<App />, document.getElementById('root'));
 
 // <App />にhtmlで作ったdomを埋め込んでもok
 // ただし、複数の要素は指定できない. <p>1</p><p>2</p>のように。
@@ -84,11 +88,6 @@ ReactDOM.render(
 	document.getElementById('root'));
 */
 
-/*
-ReactDOM.render(
-	<MyHello />, document.getElementById('root'));
-*/
-
 //ReactDOM.render(<App name="Bannai"/>,
 //ReactDOM.render(<App {...data}/>, document.getElementById('root'));
 /*
@@ -108,11 +107,11 @@ ReactDOM.render(
 	<MyPool greet="Hello" />, 
 	document.getElementById('root'));
 */
-
+/*
 ReactDOM.render(
 		<MyState />, 
 		document.getElementById('root'));
-
+*/
 /*
 ReactDOM.render(
 		<MyParent />, 

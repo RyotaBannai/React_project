@@ -2,8 +2,15 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-//　Class Component から継承（extends）してコンポーネントを作成。
+//ルーティング関連の機能をインポート
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 
+//これまで作って、indexで直接読み込んで使っていたものを、まずはApp.jsで全て読み込む.
+import MyTop from './MyTop';
+import MyHello from './MyHello';
+import MyWrapArticles from './MyWrapArticles';
+
+//　Class Component から継承（extends）してコンポーネントを作成。
 /* 
 	または、Function component(functoin <component_name>) 	でもコンポーネントの作成可能. 
 	つまりこの場合、import React, {Component} from 'react';の 	個別メンバー Componentは不要。
@@ -29,30 +36,50 @@ const style = {color:'red', backgroundColor: 'yellow'};
 */
 
 function App(props) {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-				{/*コメントはこうする。空要素は〜/>で終える*/}
-        <img src={logo} className="App-logo" alt="logo" />
-				<h2 className="App-title" style={style}>
-				{props.name}さん, Reactへようこそ！</h2>
-				<ul>
-					<li>今日は{props.today},</li>
-					<li>天気は{props.weather}です。</li>
-				</ul>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Router>
+      <div>
+        <ul>
+          <li><Link to="/">Top</Link></li>
+          <li><Link to="/hello">Hello</Link></li>
+          <li><Link to="/article">Published articles</Link></li>
+        </ul>
+        <hr />
+        <Switch>
+          <Route exact path="/" component={MyTop} />
+          <Route exact path="/hello" component={MyHello} />
+          <Route exact path="/article" component={MyWrapArticles} />
+        </Switch>
+      </div>
+    </Router>
+    
+  /*コメントはhtmlタグの中では"{/＊＊/}"こうする。空要素は〜/>で終える*/
+  /*
+  <div className="App">
+    <header className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+			<h2 className="App-title" style={style}>
+			{props.name}さん, Reactへようこそ！</h2>
+			<ul>
+				<li>今日は{props.today},</li>
+				<li>天気は{props.weather}です。</li>
+			</ul>
+      <p>
+        Edit <code>src/App.js</code> and save to reload.
+      </p>
+      <a
+        className="App-link"
+        href="https://reactjs.org"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Learn React
+      </a>
+    </header>
+  </div>
+  */
   );
 }
 
