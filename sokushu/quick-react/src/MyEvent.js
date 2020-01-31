@@ -5,7 +5,7 @@ export default class MyEvent extends Component{
 	//constructorでバインドすれば一箇所にまとめられる.
 	/*
 	constructor(props){
-		super(props)
+		super(props);
 		this.show = this.show.bind(this);
 	}
 	*/

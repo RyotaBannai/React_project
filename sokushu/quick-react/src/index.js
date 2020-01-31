@@ -9,6 +9,7 @@ import './index.css';
 //import MyEvent from './MyEvent';
 //import MyPool from './MyPool';
 import MyState from './MyState';
+import MyParent from './MyParent';
 import * as serviceWorker from './serviceWorker';
 
 // <App />にhtmlで作ったdomを埋め込んでもok
@@ -106,8 +107,14 @@ ReactDOM.render(
 	<MyPool greet="Hello" />, 
 	document.getElementById('root'));
 */
+/*
 ReactDOM.render(
 		<MyState />, 
 		document.getElementById('root'));
-	
+*/
+
+ReactDOM.render(
+		<MyParent />, 
+		document.getElementById('root'));
+		
 serviceWorker.unregister();
