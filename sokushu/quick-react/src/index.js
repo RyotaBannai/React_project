@@ -8,7 +8,7 @@ import './index.css';
 //import MyArticle from './MyArticle';
 //import MyEvent from './MyEvent';
 //import MyPool from './MyPool';
-//import MyState from './MyState';
+import MyState from './MyState';
 //import MyParent from './MyParent';
 import MyForm from './MyForm';
 import * as serviceWorker from './serviceWorker';
@@ -108,19 +108,20 @@ ReactDOM.render(
 	<MyPool greet="Hello" />, 
 	document.getElementById('root'));
 */
-/*
+
 ReactDOM.render(
 		<MyState />, 
 		document.getElementById('root'));
-*/
+
 /*
 ReactDOM.render(
 		<MyParent />, 
 		document.getElementById('root'));
 */
+/*
 ReactDOM.render(
 		<MyForm />, 
 		document.getElementById('root'));	
-
+*/
 		
 serviceWorker.unregister();

@@ -8,15 +8,22 @@ export default class MyState extends Component{
 		this.state = {
 			current: new Date()
 		};
-		
+	}
+  componentDidMount(){
 		//一定のサイクルで更新
-		setInterval(()=>{
+    //タイマーに関するコードをconstructor からdomが作られたときに呼び出されるcomponentDidMountに書く.
+		this.timer= setInterval(()=>{
 			//引数を渡すことも可能. this.setState((prevState, props)=>({}))
 			this.setState({
 				current: new Date()
 			});
 		}, 1000);
-	}
+  }
+  
+  //componentを破棄するときにタイマーも破棄.
+  componentWillUnmount(){
+    clearInterval(this.timer);
+  }
 	
 	render(){
 		return (
