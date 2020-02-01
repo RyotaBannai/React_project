@@ -1,34 +1,49 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
-// 以前のバーションだとComponent classから継承（extends）してコンポーネントを作成。現在のバージョンでは functoin <component_name> でok. 
-// つまり、import React, {Component} from 'react';の Componentは不要。
-// render method も必要ない。そのかわりdomをreturn。
-// コンポーネント名はPascal形式でhtmlタグを区別するため。
-
-// コンポーネントをeditすると、webpack-dev-server が更新を認識して、自動でリロード＆反映する。
-
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-				<h1 className="App-title">Reactへようこそ！</h1>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <React.Fragment>
+    <Router>
+      <ul>
+         <li><Link to='/'>Home</Link></li>
+         <li><Link to='/about'>About</Link></li>
+         <li><Link to='/friends'>Friends</Link></li>
+      </ul>
+      <div>
+        <Route exact path='/' component={Home} />
+        <Route path='/about' component={About} />
+        <Route path='/friends' component={Friends} />
+      </div>
+    </Router>
+    </React.Fragment>
+    )
 }
+
+//アロー関数でそのまま（）の内側をreturn.
+//<Route>のcomponent propertyに注目. classだけでなく, functionも使えたことを思い出す.
+
+const Home = () => (
+  <div>
+    <h2>Home</h2>
+    <p>Welcome to ようこそ</p>
+  </div>
+)
+
+const About = () => (
+  <div>
+    <h2>About</h2>
+    <p>フレンズに投票するページです</p>
+  </div>
+)
+
+const Friends = () => (
+  <div>
+    <h2>Friends</h2>
+    <p>ここにフレンズのリストを書きます</p>
+  </div>
+)
 
 export default App;
