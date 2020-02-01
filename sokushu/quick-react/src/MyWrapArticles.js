@@ -9,14 +9,14 @@ export default class MyWrapArticles extends Component{
   		id:13,
   		url: 'https://www.atmarkit.co.jp/ait/series/9383',
   		title: 'Angular TIPS',
-  		description: '人気のJavaScript...',
+  		description: '人気のJavaScript...No.13',
   		isNew:true
   	},
   	{
   		id:108,
   		url: 'https://www.atmarkit.co.jp/ait/series/9383',
   		title: 'Angular TIPS',
-  		description: '人気のJavaScript...',
+  		description: '人気のJavaScript...No.108',
   		isNew:true
   	}
   ];
@@ -27,15 +27,16 @@ export default class MyWrapArticles extends Component{
   }//end of constructor
   
   selectedArticle(){
-    this.articles.forEach(element => {
-      /*console.log(`Prop id is: ${this.props.match.params.id}`);
-      console.log(`Element id is: ${element.id}`);*/
-      if ( element.id == this.props.match.params.id){
+    for(var i=0; i < this.articles.length; i++){
+      /*
+      console.log(`Prop id is: ${this.props.match.params.id}`);
+      console.log(`Element id is: ${element.id}`);
+      */
+      if ( this.articles[i].id == this.props.match.params.id){
         console.log('Ids match.');
-        return <MyArticle {...element}/>;
+        return <MyArticle {...this.articles[i]}/>;
       }
-    })
-    console.log('end of foreach');
+    }
   }
   
   render(){
