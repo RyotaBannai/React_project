@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Route, Link, Switch} from "react-router-dom";
 import MyArticle from './MyArticle';
 
 export default class MyWrapArticles extends Component{
@@ -48,8 +49,27 @@ export default class MyWrapArticles extends Component{
   }
   
   render(){
+    const id = this.props.match.params.id;
+    const path = this.props.match.path;
+    const url = this.props.match.url;
+    //console.log(`url is: ${url}`) //>> /article/13
+    //console.log(`path is: ${path}`) //>> /article/:id
+    // /artigle/13/pages/1
     return(
-      <React.Fragment>{this.selectedArticle()}</React.Fragment>
+      <React.Fragment>
+      
+      {this.selectedArticle()}
+      <hr />
+      [<Link to={`${url}/pages/1`}>1</Link>]
+      [<Link to={`${url}/pages/2`}>2</Link>]
+      <hr />
+      <Switch>
+        {/*親コンポーネントですでにpath="/article/:id/pages/:page"でここまでのpathを指定してるので、そのまま使用する.*/}
+        <Route path={`${path}`} render={()=> <p>{`Page.${this.props.match.params.page}.This is the nested routing.`}</p> } />
+        <Route render={()=> <p>No page any more.</p> } />
+      </Switch>
+        
+      </React.Fragment>
     )
   }
 }

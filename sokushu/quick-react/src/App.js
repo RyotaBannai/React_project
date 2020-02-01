@@ -60,10 +60,12 @@ function App(props) {
           <li><NavLink to="/view" activeStyle={current}>View</NavLink></li>
         </ul>
         <hr />
+          
         <Switch>
           <Route exact path="/" component={MyTop} />
           <Route exact path="/hello" component={MyHello} />
           <Route exact path="/article/:id" component={MyWrapArticles} />
+          <Route exact path="/article/:id/pages/:page" component={MyWrapArticles} />
           {/*component要素の代わりにrenderも使える.
            無名関数ではなく、アロー関数を使う.
             後ろに続く()は, タグ１つであれば、あってもなくてもいい.*/}
