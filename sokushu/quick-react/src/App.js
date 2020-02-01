@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
@@ -31,15 +31,36 @@ const FRIENDS = [
 */
 
 const friendById = id => FRIENDS.find(friend => friend.id === id)
-const FriendList = () => (
+
+/*
+const FriendList = props => (
   <ul>
     {FRIENDS.map(friend => (
       <li key={friend.id}>
         <Link to={`/friends/${friend.id}`}>{friend.nameJa}</Link>
+        <button onClick={() => props.handleVote(friend.id)}>+</button>
       </li>
     ))}
   </ul>
 )
+*/
+class FriendList extends Component {
+  constructor(props) {
+    super(props)
+  }
+  render(){
+    return(
+      <ul>
+        {FRIENDS.map(friend => (
+          <li key={friend.id}>
+            <Link to={`/friends/${friend.id}`}>{friend.nameJa}</Link>
+            <button onClick={() => this.props.handleVote(friend.id)}>+</button>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+}
 
 //アロー関数でそのまま（）の内側をreturn.
 //<Route>のcomponent propertyに注目. classだけでなく, functionも使えたことを思い出す.
@@ -57,7 +78,7 @@ const About = () => (
     <p>フレンズに投票するページです</p>
   </div>
 )
-
+/*
 const Friends = () => (
   <div>
     <h2>Friends</h2>
@@ -65,12 +86,50 @@ const Friends = () => (
     <Route exact path='/friends/:id' component={Friend} />
   </div>
 )
+*/
+
+class Friends extends Component {
+  constructor() {
+    super()
+    this.state = {}
+    this.handleVote = this.handleVote.bind(this)
+  }
+
+  componentWillMount() {
+    //この処理はconstructorでやってしまった方がいい.
+    FRIENDS.forEach(friend => {
+      this.setState({
+        ...this.state,
+        [friend.id]: 0
+      })
+    })
+  }
+
+  handleVote(id) {
+    this.setState({
+      [id]: this.state[id] + 1
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Friends</h2>
+        <Route exact path='/friends'>
+          <FriendList handleVote={this.handleVote} />
+        </Route>
+        <Route path='/friends/:id' render={props => <Friend match={props.match} votes={this.state} />} />
+      </div>
+    )
+  }
+}
 
 const Friend = props => {
   //アロー関数で内側に何か宣言したいときは{}を使って、
   //return をする.
   const { id } = props.match.params
   const friend = friendById(id)
+  const vote = props.votes[id]
 
   if (typeof friend === 'undefined')  {
     return (
@@ -89,6 +148,7 @@ const Friend = props => {
         <p style={contentsStyle}>{friend.family}</p>
         <h1 style={contentsStyle}>{friend.nameJa}</h1>
         <p style={contentsStyle}>{friend.nameEn}</p>
+       <h1>Vote: {vote}</h1>
       </div>
     </div>
   )
