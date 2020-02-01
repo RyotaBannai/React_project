@@ -35,7 +35,7 @@ export default class MyArticle extends Component{
 					{/*関数で外に出した方が見やすい*/}
 					{this.renderIfNew(this.props.isNew)}
 				</dt>
-				<dd>{this.props.description}</dd>
+				<dd>{this.props.description}{`No.${this.props.id}`}</dd>
 			</React.Fragment>
 		)
 	}

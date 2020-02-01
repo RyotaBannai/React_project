@@ -9,14 +9,14 @@ export default class MyWrapArticles extends Component{
   		id:13,
   		url: 'https://www.atmarkit.co.jp/ait/series/9383',
   		title: 'Angular TIPS',
-  		description: '人気のJavaScript...No.13',
+  		description: '人気のJavaScript...',
   		isNew:true
   	},
   	{
   		id:108,
   		url: 'https://www.atmarkit.co.jp/ait/series/9383',
   		title: 'Angular TIPS',
-  		description: '人気のJavaScript...No.108',
+  		description: '人気のJavaScript...',
   		isNew:true
   	}
   ];
@@ -30,10 +30,18 @@ export default class MyWrapArticles extends Component{
     for(var i=0; i < this.articles.length; i++){
       /*
       console.log(`Prop id is: ${this.props.match.params.id}`);
-      console.log(`Element id is: ${element.id}`);
+      console.log(`Element id is: $
+      {element.id}`);
+      */
+      /*
+        this.props.
+        -location
+        -math.path
+        -math.url
+        -history等も使用できる.
       */
       if ( this.articles[i].id == this.props.match.params.id){
-        console.log('Ids match.');
+        //console.log('Ids match.');
         return <MyArticle {...this.articles[i]}/>;
       }
     }

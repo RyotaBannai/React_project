@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 //ルーティング関連の機能をインポート
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Link, NavLink, Route, Switch} from "react-router-dom";
 /*
   BrowserRouter: ブラウザーのhistory APIでルーティングを利用.
   HashRouter: ハッシュ形式でパスを管理.
@@ -15,6 +15,7 @@ import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import MyTop from './MyTop';
 import MyHello from './MyHello';
 import MyWrapArticles from './MyWrapArticles';
+import ErrPage from './ErrPage'
 
 //　Class Component から継承（extends）してコンポーネントを作成。
 /* 
@@ -42,20 +43,21 @@ const style = {color:'red', backgroundColor: 'yellow'};
 */
 
 function App(props) {
-  //<Swich>は最初に合致した要素だけを出力するための命令.
+//const App = props =>{
+  //<Swich>は上から順に評価し、最初に合致した要素「1つのみ」出力するための命令. 
   //exactは完全マッチ.もしexactを指定しなければ,
-  //'/hello'は'/'にも一致するため,'/'以外のpathは表示されない.
+  //'/hello'は'/'にも一致するため,'/'以外のpathは表示されない.  //activeStyleの他に、activeClassName='now'のようにして、nowクラスを使ってstylingすることもできる.
+  const current = {color:'red'}
   return (
-
     <Router>
       <div>
         <ul>
-          <li><Link to="/">Top</Link></li>
-          <li><Link to="/hello">Hello</Link></li>
+          <li><NavLink to="/" activeStyle={current} exact>Top</NavLink></li>
+          <li><NavLink to="/hello" activeStyle={current}>Hello</NavLink></li>
           {/*ルートパラメータ付き.*/}
-          <li><Link to="/article/13">Published articles No.13</Link></li>
-          <li><Link to="/article/108">Published articles　No.108</Link></li>
-          <li><Link to="/view">View</Link></li>
+          <li><NavLink to="/article/13" activeStyle={current}>Published articles No.13</NavLink></li>
+          <li><NavLink to="/article/108" activeStyle={current}>Published articles　No.108</NavLink></li>
+          <li><NavLink to="/view" activeStyle={current}>View</NavLink></li>
         </ul>
         <hr />
         <Switch>
@@ -66,6 +68,8 @@ function App(props) {
            無名関数ではなく、アロー関数を使う.
             後ろに続く()は, タグ１つであれば、あってもなくてもいい.*/}
           <Route path='/view' render={()=> <div>This is created by render instead of component element.</div> } />
+            
+          <Route component={ErrPage}/>
         </Switch>
       </div>
     </Router>
