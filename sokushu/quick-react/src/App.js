@@ -4,6 +4,12 @@ import './App.css';
 
 //ルーティング関連の機能をインポート
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+/*
+  BrowserRouter: ブラウザーのhistory APIでルーティングを利用.
+  HashRouter: ハッシュ形式でパスを管理.
+  MemoeyRouter: メモリー上のみで履歴管理.
+  NativeRouter: スマホ環境向け.
+*/
 
 //これまで作って、indexで直接読み込んで使っていたものを、まずはApp.jsで全て読み込む.
 import MyTop from './MyTop';
@@ -36,7 +42,9 @@ const style = {color:'red', backgroundColor: 'yellow'};
 */
 
 function App(props) {
-  
+  //<Swich>は最初に合致した要素だけを出力するための命令.
+  //exactは完全マッチ.もしexactを指定しなければ,
+  //'/hello'は'/'にも一致するため,'/'以外のpathは表示されない.
   return (
 
     <Router>
@@ -44,13 +52,20 @@ function App(props) {
         <ul>
           <li><Link to="/">Top</Link></li>
           <li><Link to="/hello">Hello</Link></li>
-          <li><Link to="/article">Published articles</Link></li>
+          {/*ルートパラメータ付き.*/}
+          <li><Link to="/article/13">Published articles No.13</Link></li>
+          <li><Link to="/article/108">Published articles　No.108</Link></li>
+          <li><Link to="/view">View</Link></li>
         </ul>
         <hr />
         <Switch>
           <Route exact path="/" component={MyTop} />
           <Route exact path="/hello" component={MyHello} />
-          <Route exact path="/article" component={MyWrapArticles} />
+          <Route exact path="/article/:id" component={MyWrapArticles} />
+          {/*component要素の代わりにrenderも使える.
+           無名関数ではなく、アロー関数を使う.
+            後ろに続く()は, タグ１つであれば、あってもなくてもいい.*/}
+          <Route path='/view' render={()=> <div>This is created by render instead of component element.</div> } />
         </Switch>
       </div>
     </Router>

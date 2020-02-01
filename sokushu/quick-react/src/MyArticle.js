@@ -2,7 +2,12 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import MyNew from './MyNew';
 
-export default class MyTypes2 extends Component{
+export default class MyArticle extends Component{
+  
+  componentWillMount(){
+		console.log('MyArticle component is Called');
+  }
+  
 	//条件分岐用のコード
 	renderIfNew(isNew){
 		if(isNew) return <MyNew />
