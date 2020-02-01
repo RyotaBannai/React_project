@@ -7,6 +7,7 @@ export default class Todo extends React.Component {
   }
   render() {
     const { complete, edit, text } = this.props;
+    //propsを全部出してしまった方がやりやすい.
     const icon = complete ? "\u2714" : "\u2716";
 
     if (edit) {
