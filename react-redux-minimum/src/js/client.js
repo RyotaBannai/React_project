@@ -1,36 +1,53 @@
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
+import { createLogger } from "redux-logger";
+import thunk from "redux-thunk";
+import axios from "axios";
 
-const reducer = (state=0, action) => {
-  console.log("reducer has been called.");
-  switch(action.type){
-  case "INC":
-    //return state + 1;
-    return state + action.payload;
-  case "DEC":
-    return state - action.payload;
-  }
+const initialState = {
+  fetching: false,
+  fetched: false,
+  users: [],
+  error: null
+};
+
+const reducer = (state=initialState, action) => {
+  switch (action.type) {
+    case "FETCH_USERS_START":
+      return {...state, fetching: true};
+    case "FETCH_USERS_ERROR":
+      return {...state, fetching :false, error: action.payload};
+    case "RECEIVE_USERS":
+      return {
+         ...state,
+        fetching: false,
+        fetched: true,
+        users: action.payload
+      };
+    }
   return state;
-}
+};
 
-//createStore にはReducer とデータの初期値を渡す.
-//この段階ではReducer は初期値を設定するために呼ばれる.
-/*
-  一般的にデータの初期値はObjectが使われるが、
-  シンプルにするため、プリミティブ型(int)を使う.
-*/
-/*
-  複数のreducer が単一のstore に対して処理を行うことも可能.
-*/
-const store = createStore(reducer, 1);
+//const middleware = applyMiddleware(createLogger());
+//  |
+//  v
+const middleware = applyMiddleware(thunk, createLogger());
 
-//subscribe はstoreに変化があったときにcallされる.
-store.subscribe(() => {
-  console.log("store changed", store.getState());
+const store = createStore(reducer, middleware);
+
+
+//dispatcher は単純なObject が渡されることを期待していて、
+//関数が渡されることを期待していない.
+//store.dispatch({type: "FOO"});
+/*
+  store.dispath内に複数のdispatchの処理を渡したいときはredux-thunkを利用.
+*/
+
+store.dispatch((dispatch) => {
+  dispatch({type: "FETCH_USERS_START"});
+  
+  axios.get("http://localhost:18080").then((response) => {
+    dispatch({type: "RECEIVE_USERS", payload: response.data});
+  }).catch((err) => {
+    dispatch({type: "FETCH_USERS_ERROR", payload: err});
+  });
 });
-//dispatchはactionを感知し、storeに変化を送る.
-//store.dispatch({type: "INC"});
-store.dispatch({type: "INC", payload: 1});
-store.dispatch({type: "INC", payload: 20});
-//dispatch するところでも同様にReducer が呼ばれる.
-//Action に追加のデータを入れてあげればReducer でもそのデータを扱えるようになる.
-// action -> dispatch -> subscribe.
