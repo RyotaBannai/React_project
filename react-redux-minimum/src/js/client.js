@@ -1,36 +1,60 @@
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
 
-const reducer = (state=0, action) => {
-  console.log("reducer has been called.");
-  switch(action.type){
-  case "INC":
-    //return state + 1;
-    return state + action.payload;
-  case "DEC":
-    return state - action.payload;
+//データの初期値を それぞれ{}, []とする.
+const userReducer = (state = {}, action) => {
+  switch(action.type) {
+      case "CHANGE_NAME":
+        //state.name = action.payload;
+        state = {...state, name: action.payload}
+        break;
+      case "CHANGE_AGE":
+        //state.age = action.payload;
+        state = {...state, age: action.payload}
+        break;
+    }
+  return state;
+}
+
+const tweetsReducer = (state = [], action) => {
+  switch(action.type) {
+    case "ADD_TWEET":
+       state = state.concat({id: Date.now(), text: action.payload});
+       break;
   }
   return state;
 }
 
-//createStore にはReducer とデータの初期値を渡す.
-//この段階ではReducer は初期値を設定するために呼ばれる.
 /*
-  一般的にデータの初期値はObjectが使われるが、
-  シンプルにするため、プリミティブ型(int)を使う.
+  userReducer, tweetsReducer の2 つはdispatch  が行われるたびに、シーケンシャルに呼ばれる.
 */
-/*
-  複数のreducer が単一のstore に対して処理を行うことも可能.
-*/
-const store = createStore(reducer, 1);
+const reducers = combineReducers({
+  user: userReducer,
+  tweets: tweetsReducer
+});
 
-//subscribe はstoreに変化があったときにcallされる.
+
+//const store = createStore(reducers, { user: { name: "Tsutomu", age: 35 }, twiits: [] });
+const store = createStore(reducers);
+
 store.subscribe(() => {
   console.log("store changed", store.getState());
 });
-//dispatchはactionを感知し、storeに変化を送る.
-//store.dispatch({type: "INC"});
-store.dispatch({type: "INC", payload: 1});
-store.dispatch({type: "INC", payload: 20});
-//dispatch するところでも同様にReducer が呼ばれる.
-//Action に追加のデータを入れてあげればReducer でもそのデータを扱えるようになる.
-// action -> dispatch -> subscribe.
+//store.dispatch({type: "FOO", payload: "BAR"})
+store.dispatch({type: "CHANGE_NAME", payload: "Tsutomu"});
+store.dispatch({type: "CHANGE_AGE", payload: 35});
+/*
+
+  これは1 回目のuserReducer でreturn しているオブジェクトと2 回目のuserReducer でreturn しているオブジェクトが完全に同一のオブジェクトであるため、かつJavaScript の非同期性の特性からstore.subscribe 内にあるconsole.log が呼ばれる時点で、user とage が既に設定されてしまっている、完全に同じオブジェクトを出力してしまうわけです。
+  
+  1回目：state1のnameを変更し、変化後のstate1をreturn.
+  2回目：state1のageを変更し、変化後のstate1をreturn.
+ =>結果として、cosole.logでcallしたときにはstate1のデータが全部更新された状態のものが表示される.
+  immutableな方法で行う =>
+  1回目：state1のnameを変更し、変化後のstate1をreturn.
+  2回目：state2のageを変更し(state2を作成しstate1を上書きする.)、
+        変化後のstate1をreturn.
+
+*/
+
+store.dispatch({type: "ADD_TWEET", payload: "OMG LIKE LOL"});
+store.dispatch({type: "ADD_TWEET", payload: "I am so like seriously like totally like right now"});
