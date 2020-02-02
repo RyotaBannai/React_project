@@ -11,18 +11,28 @@ export default class Todos extends React.Component {
     this.state = {
       todos: TodoStore.getAll(),
     };
+    this.getTodos = this.getTodos.bind(this)
   }
   
   componentDidMount() {
     
     //emitで発動されたchangeを受け取って、viewに反映している部分.
-     TodoStore.on("change", () => {
-       this.setState({
-         todos: TodoStore.getAll()
-       });
-     });
+     TodoStore.on("change", this.getTodos);
+     console.log("count", TodoStore.listenerCount("change"));
    }
-   /*
+   
+   //メモリーリークが起こるので、セットしたイベントリスナーはコンポネントのunmount時
+   //に解放する.
+   componentWillUnmount() {
+      TodoStore.removeListener("change", this.getTodos);
+    }
+    
+    getTodos(){
+      this.setState({
+        todos: TodoStore.getAll()
+      });
+    }
+    /*
      flux で非同期処理を扱う:
      Create ボタンを変更して、Todo リストをReload
      するボタンを実装し、インターネット経由でTodoリストを取得するアプリ作成.
