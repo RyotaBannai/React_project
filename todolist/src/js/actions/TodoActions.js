@@ -14,6 +14,30 @@ export function deleteTodo(id) {
   });
 }
 
+
+export function reloadTodo() {
+    //本来ならば非同期処理を行う場合axiosなどのツールを使うことになる.
+    //ここでは意図的にsetTimeoutで非同期処理を実装.
+    // axios("http://someurl.com/somedataendpoint").then((data) => {
+    //   console.log("got the data!", data);
+    // });
+    
+    dispatcher.dispatch({type: "FETCH_TODOS"});
+    setTimeout(() => {
+      dispatcher.dispatch({type: "RECEIVE_TODOS", todos: [
+        {
+          id: 213464613,
+          text: "Go Shopping Again",
+          complete: false
+        },
+        {
+          id: 335684679,
+          text: "Sleep At The Yard.",
+          complete: true
+        }
+      ]});
+    }, 1000);
+}
 /*
 
 ......

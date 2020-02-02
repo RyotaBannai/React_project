@@ -30,18 +30,23 @@ class TodoStore extends EventEmitter{
     //todoを作成するmethodもstoreに作成.
     //createTodo methods が呼ばれるとchange イベントを発動し、イベント駆動形でTodo.js (View) の処理を呼び出す.
     createTodo(text) {
-        const id = Date.now();
+      const id = Date.now();
     
-        this.todos.push({
-          id,
-          text,
-          complete: false
-        });
-        //storeに変化があれば、最終段階のviewにその変化を反映させる.
-        //そのために on("change")で受け取る
-        this.emit("change");
-      }
-  
+      this.todos.push({
+        id,
+        text,
+        complete: false
+      });
+      //storeに変化があれば、最終段階のviewにその変化を反映させる.
+      //そのために on("change")で受け取る
+      this.emit("change");
+    }
+    
+    receiveTodo(todos){
+      this.todos = todos;
+      this.emit("change");
+    }
+    
     getAll() {
       return this.todos;
     }
@@ -49,12 +54,15 @@ class TodoStore extends EventEmitter{
     /*handleActions に渡ってきたデータをaction type 毎に処理をハンドリングするように条件分岐を書く。*/
     handleActions(action) {
       switch(action.type) {
-            case "CREATE_TODO": {
-              this.createTodo(action.text);
-            }
-          }
+        case "CREATE_TODO": {
+          this.createTodo(action.text);
+        }
+        case "RECEIVE_TODOS": {
+          this.receiveTodo(action.todos);
+        }
       }
-}
+    } 
+  }
 
 const todoStore = new TodoStore;
 
@@ -71,7 +79,7 @@ const todoStore = new TodoStore;
 */
 
 dispatcher.register(todoStore.handleActions.bind(todoStore));
-window.dispatcher = dispatcher;
+//window.dispatcher = dispatcher;
 
 export default todoStore;
 

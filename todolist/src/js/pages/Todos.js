@@ -22,9 +22,18 @@ export default class Todos extends React.Component {
        });
      });
    }
-   
+   /*
+     flux で非同期処理を扱う:
+     Create ボタンを変更して、Todo リストをReload
+     するボタンを実装し、インターネット経由でTodoリストを取得するアプリ作成.
+   */
+   /*
    createTodo() {
-       TodoActions.createTodo("New Todo");
+      TodoActions.createTodo("New Todo");
+   }
+   */
+   reloadTodos(){
+      TodoActions.reloadTodo();
    }
 
   render() {
@@ -36,7 +45,8 @@ export default class Todos extends React.Component {
 
     return (
       <div>
-        <button onClick={this.createTodo.bind(this)}>Create!</button>
+        {/*<button onClick={this.createTodo.bind(this)}>Create!</button>*/}
+        <button onClick={this.reloadTodos.bind(this)}>Reload!</button>
         <h1>Todos</h1>
         <ul>{TodoComponents}</ul>
       </div>
