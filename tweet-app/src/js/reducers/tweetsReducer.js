@@ -1,3 +1,4 @@
+//State の初期値をES6 記法で定義
 export default function reducer(state={
     tweets: [],
     fetching: false,

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//state を変更するための関数
 export function fetchTweets() {
   return function(dispatch) {
     dispatch({type: "FETCH_TWEETS"});
