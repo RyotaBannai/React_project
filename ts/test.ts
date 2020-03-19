@@ -13,3 +13,8 @@ let data4 = null; // any type
 
 // TS 2.1 以降は　noImplicitAny Optionで
 // 初めて代入された型がその方になる.
+
+let mail: string = "admin@gmail.com;";
+let msg = `we are now hiring engineer. 
+if you're interested in, contact us via email: 
+${mail}. we're all looking forward hearing from Yo!`;
