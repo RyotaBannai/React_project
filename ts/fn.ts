@@ -1,5 +1,6 @@
 // 他のtsファイルの読み込み
-import fns = require('./functions');
+import fns = require('./functions'); // この方法でnamespaceを確保
+import {test_export, test} from './functions'
 
 // 関数の主な記法
 // 1. function命令
@@ -11,3 +12,6 @@ function triangle(base: number, height: number): number{
   return base* height/ 2;
 }
 fns.clog(triangle(10,5))
+test_export()
+test()
+
