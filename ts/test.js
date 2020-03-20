@@ -1,3 +1,6 @@
+"use strict";
+exports.__esModule = true;
+var _ = require("lodash");
 var data = "hoge";
 data = "foo";
 var data2 = 100;
@@ -50,3 +53,58 @@ var obj2 = {
     man: "dude"
 };
 clog(obj2.ohh);
+var obj3 = {
+    one: 1,
+    two: 2
+};
+// obj3.three = 3; // 後から宣言していない変数へアクセスしようとするとエラー
+// プロパティ構文・ブラケット構文で要素にアクセスできる
+var obj4 = {
+    one: 1,
+    two: 2
+};
+obj4.three = 3;
+// インデックスシグネチャで宣言してあげれば、後から新しい変数へアクセスできる
+var Sex;
+(function (Sex) {
+    Sex[Sex["MALE"] = 0] = "MALE";
+    Sex[Sex["FEMALE"] = 1] = "FEMALE";
+    Sex[Sex["UNKNOWN"] = 2] = "UNKNOWN";
+})(Sex || (Sex = {}));
+var m = Sex.MALE; //型をEnumにする
+clog(m); // インデックスを取得（列挙子にはデフォルトで数値が割り振られる）
+clog(Sex[m]); // Value（列挙子）を取得
+var Sex2;
+(function (Sex2) {
+    Sex2[Sex2["MALE"] = 1] = "MALE";
+    Sex2[Sex2["FEMALE"] = 2] = "FEMALE";
+    Sex2[Sex2["UNKNOWN"] = 4] = "UNKNOWN";
+})(Sex2 || (Sex2 = {}));
+// Tuple: 複数の異なる型の集合を表現するためのデータ型
+var diff_types_of_data = ["Ryota", 26, true];
+if (diff_types_of_data[2]) {
+    clog(diff_types_of_data[0]);
+}
+// Union 共用型
+var union;
+union = "hahah";
+// union = 123; // here is an error
+union = false;
+var union_array = [
+    "whatever you want",
+    true,
+    "yea haa",
+    false
+];
+var whatever = ["aaa", 100, false];
+var array_whatever = ["aaa", "aaa", "aaa"];
+function getScene(s) {
+    clog(s);
+}
+getScene("spring");
+// getScene("sprin"); // error
+// jquery を使ってみる
+// $(function() {
+//   $(".class").css("background-color", "Red");
+// });
+clog(_.toUpper("hello world!"));
