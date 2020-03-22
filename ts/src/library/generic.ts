@@ -1,6 +1,4 @@
-function clog(input: (string | number | boolean)) {
+function clog(input: string | number | number[] | number[][] | boolean) {
   console.log(input);
 }
-export {
-  clog,
-}
+export { clog };
