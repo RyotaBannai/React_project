@@ -1,8 +1,9 @@
 {
   "allowJs": true,
-  "compilerOptions":{
+  "compilerOptions": {
     // "sourceMap": true,
     "target": "es5",
+    "module": "commonjs",
     "rootDir": ".",
     "outDir": "../build/"
   }
