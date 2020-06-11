@@ -14,8 +14,8 @@ ReactDOM.render(
         <Layout>
             <Route exact path="/" component={Featured}></Route>
             <Route exact path="/archives/" component={Archives}></Route>
-            <Route path="/archives/:article" component={Archives}></Route>
-            <Route path="/settings" component={Settings}></Route>
+            <Route exact path="/archives/:article" component={Archives}></Route>
+            <Route exact path="/settings" component={Settings}></Route>
         </Layout>
     </Router>,
     app);
