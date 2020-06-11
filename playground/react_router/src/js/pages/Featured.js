@@ -5,16 +5,14 @@ export default class Featured extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ArticlesInfo: [],
-            Articles : [],
+            articles: [],
         };
         this.deleteArticle = this.deleteArticle.bind(this);
     }
     componentDidMount() {
         // document.title = `You clicked ${this.state.count} times`;
         let counter = new this.Counter();
-        let Articles = [];
-        const ArticlesInfo = [{
+        const articles = [{
             key: counter.uuid,
             title: 'The Civil Rights Act of 2020',
             content: 'There are images of police officers joining protesters in dancing the Cupid shuffle, taking knees and hugging little girls.',
@@ -30,13 +28,8 @@ export default class Featured extends React.Component {
 
         }];
 
-        for(const Props of ArticlesInfo){
-            Articles.push(<Article {...Props} id={Props.key} deleteArticle={this.deleteArticle}/>)
-        }
-
         this.setState({
-            ArticlesInfo: ArticlesInfo,
-            Articles: Articles
+            articles: articles
         });
     }
     es6Function = (value) => { // 2019 Update with react 16+ and ES6
@@ -44,14 +37,8 @@ export default class Featured extends React.Component {
     }
     deleteArticle(article_id) {
         console.log('wanna delete...');
-        let new_article_list = this.state.ArticlesInfo.filter(article => article.key !== article_id);
-        let articles = [];
-        for(const Props of new_article_list){
-            articles.push(<Article {...Props} id={Props.key} deleteArticle={this.deleteArticle}/>)
-        }
         this.setState({
-            ArticlesInfo: new_article_list,
-            Articles: articles, // renderしてるやつを更新して上げないとreactiveにならない
+            articles: this.state.articles.filter(article => article.key !== article_id),
         });
     }
     Counter (initial_count = 0) {
@@ -71,7 +58,8 @@ export default class Featured extends React.Component {
                     </div>
                 </div>
             </div>
-            <div className="row">{this.state.Articles}</div>
+            <div className="row">{this.state.articles.map(article =>
+                <Article {...article} id={article.key} deleteArticle={this.deleteArticle}/>)}</div>
         </div>
     }
 }

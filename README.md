@@ -21,3 +21,6 @@ const checkActive = (match, location) => {
 ```
 ###
 - setState() は state の更新を予約するだけで、すぐには state は更新しない。render() が呼ばれる前に更新後の値をすぐ使いたい場合は注意。
+- Key : this._reactInternalFiber.key, Index : this._reactInternalFiber.index
+- propsから使う関数は {()=> this.props.function()} みたいにする。this で使うときは {this.function}でok。
+- propsから使う関数でchildのthisを使いたいときは、{this.props.function.bind(this)} みたいにすれば良い。
