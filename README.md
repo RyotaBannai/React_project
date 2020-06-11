@@ -24,3 +24,35 @@ const checkActive = (match, location) => {
 - Key : this._reactInternalFiber.key, Index : this._reactInternalFiber.index
 - propsから使う関数は {()=> this.props.function()} みたいにする。this で使うときは {this.function}でok。
 - propsから使う関数でchildのthisを使いたいときは、{this.props.function.bind(this)} みたいにすれば良い。
+- 上記の方法でもtarget取れるが、`{(e)=> this.props.function(e)}` でイベントオブジェクトを渡してあげる方が良い。
+- `特定のelement`を参照したい場合はrefを使う。以下のコードなら、this.contentRefでいつでもアクセス可能。
+```javascript
+constructor(){
+    this.contentRef = React.createRef();
+}
+render() {
+    return <p ref={this.contentRef}> {this.state.showContent ? content : null}</p>
+}
+```
+- イベントのtargetはこうやってアクセス。
+- 特定の要素のstyleを取得したい場合は　`computedStyleMap()`　を使う。
+```javascript
+// (test: you should use this rather than refs)   
+eventHandler(event){
+ const target = event.target; 
+}
+const node = this.contentRef.current; // get dom
+if(node.computedStyleMap().get('display').value === 'block')
+    node.style.display = 'none';
+else
+    node.style.display = 'block';
+```
+- Because this.props and this.state may be updated asynchronously, you should not rely on their values for calculating the next state. You should pass state, props.
+```javascript
+// Correct
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+```
+- A component may choose to pass its state down as props to its child components: This is commonly called a “`top-down`” or “`unidirectional`” data flow. 引数にはprops なのかstateなのか明示してあげるとわかりやすい。
+- 親コンポネントメソッドを子に渡してあげれば、https://reactjs.org/docs/lifting-state-up.html　のようにstateをシンクさせる機能を実装できる。
