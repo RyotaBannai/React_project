@@ -13,7 +13,7 @@ module.exports = {
       use: [{
         loader: 'babel-loader',
         options: {
-          plugins: ['react-html-attrs'],
+          plugins: ['react-html-attrs', '@babel/plugin-proposal-class-properties'],
           presets: ['@babel/preset-react', '@babel/preset-env']
         }
       }]
@@ -44,5 +44,6 @@ module.exports = {
   plugins: debug ? [] : [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+
   ],
 };

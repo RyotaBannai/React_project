@@ -2,6 +2,14 @@ import React from "react";
 import Article from "../components/Article";
 
 export default class Featured extends React.Component {
+    es6Function = (value) => { // 2019 Update with react 16+ and ES6
+        console.log(value)
+    }
+
+    deleteArticle() {
+        console.log('wanna delete...');
+    }
+
     render() {
         function Counter(initial_count = 0) {
             let _uuid = initial_count;
@@ -11,6 +19,8 @@ export default class Featured extends React.Component {
         }
 
         let counter = new Counter();
+
+
 
         const ArticlesInfo = [{
                 key: counter.uuid,
@@ -29,7 +39,7 @@ export default class Featured extends React.Component {
             }];
         let Articles = [];
         for(const Props of ArticlesInfo){
-            Articles.push(<Article {...Props} />)
+            Articles.push(<Article {...Props} deleteArticle={this.deleteArticle}/>)
         }
         return <div>
             <h1>Featured</h1>

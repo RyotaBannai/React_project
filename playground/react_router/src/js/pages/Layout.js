@@ -1,5 +1,6 @@
 import React from "react";
 import Nav from '../components/Nav';
+import '../../sass/Layout.scss'
 import { Link, NavLink, WithRouter } from "react-router-dom";
 
 export default class Layout extends React.Component {
@@ -7,7 +8,7 @@ export default class Layout extends React.Component {
         return (
             <div>
                 <Nav/>
-                <div className="container" style={{marginTop: "60px;"}}>
+                <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
                             <h1>News.net</h1>

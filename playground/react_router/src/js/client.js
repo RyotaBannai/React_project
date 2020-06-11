@@ -12,10 +12,10 @@ const app = document.getElementById('app');
 ReactDOM.render(
     <Router>
         <Layout>
-            <Route exact path="/" component={Featured}></Route>
-            <Route exact path="/archives/" component={Archives}></Route>
-            <Route exact path="/archives/:article" component={Archives}></Route>
-            <Route exact path="/settings" component={Settings}></Route>
+            <Route exact path="/" component={Featured} />
+            <Route exact path="/archives/" component={Archives} />
+            <Route exact path="/archives/:article" component={Archives} />
+            <Route exact path="/settings" component={Settings} />
         </Layout>
     </Router>,
     app);

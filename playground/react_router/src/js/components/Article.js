@@ -1,5 +1,5 @@
 import React from "react";
-import './Article.scss';
+import '../../sass/Article.scss';
 
 export default class Article extends React.Component {
     constructor() {
@@ -34,12 +34,15 @@ export default class Article extends React.Component {
     }
     render() {
         const { title, content } = this.props;
+        console.log(this.props)
         return <div className="col-md-4">
             <h2>{title}</h2>
-            <p ref={this.contentRef} style={{display:'none', borderColor: '#f8f9fa'}}>{content}</p>
-            <a className="btn btn-default" href="#" onClick={this.toggleContent.bind(this)}>
-                <button type='button' className='btn btn-light'>{this.state.message}</button>
+            <p ref={this.contentRef}>{content}</p>
+            <button type='button' className='btn btn-light' onClick={this.toggleContent.bind(this)}>{this.state.message}</button>
+            <a className="btn btn-default" href="#" >
+                <button type='button' className='btn btn-info'>Jump to Article</button>
             </a>
+            <button type='button' className='btn btn-danger' onClick={this.props.deleteArticle}>Delete Article</button>
         </div>
     }
 }
