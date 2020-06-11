@@ -33,8 +33,7 @@ export default class Article extends React.Component {
         }
     }
     render() {
-        const { title, content } = this.props;
-        console.log(this.props)
+        const { title, content, id } = this.props;
         return <div className="col-md-4">
             <h2>{title}</h2>
             <p ref={this.contentRef}>{content}</p>
@@ -42,7 +41,7 @@ export default class Article extends React.Component {
             <a className="btn btn-default" href="#" >
                 <button type='button' className='btn btn-info'>Jump to Article</button>
             </a>
-            <button type='button' className='btn btn-danger' onClick={this.props.deleteArticle}>Delete Article</button>
+            <button type='button' className='btn btn-danger' onClick={() => this.props.deleteArticle(id)}>Delete Article</button>
         </div>
     }
 }
