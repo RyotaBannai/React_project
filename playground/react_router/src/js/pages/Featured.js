@@ -37,9 +37,9 @@ export default class Featured extends React.Component {
     }
     deleteArticle(article_id) {
         console.log('wanna delete...');
-        this.setState({
-            articles: this.state.articles.filter(article => article.key !== article_id),
-        });
+        this.setState((state, props) => ({
+            articles: state.articles.filter(article => article.key !== article_id),
+        }));
     }
     Counter (initial_count = 0) {
         let _uuid = initial_count;

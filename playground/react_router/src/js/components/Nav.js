@@ -31,6 +31,11 @@ export default class Layout extends React.Component {
                             </NavLink>
                         </li>
                         <li className="nav-item">
+                            <NavLink to="/add" activeClassName="active">
+                                <div className="nav-link">Add Article</div>
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
                             <NavLink to="/disabled" activeClassName="active">
                                 <div className="nav-link disabled">Disabled</div>
                             </NavLink>
