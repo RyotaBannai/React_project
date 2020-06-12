@@ -56,3 +56,12 @@ this.setState((state, props) => ({
 ```
 - A component may choose to pass its state down as props to its child components: This is commonly called a “`top-down`” or “`unidirectional`” data flow. 引数にはprops なのかstateなのか明示してあげるとわかりやすい。
 - 親コンポネントメソッドを子に渡してあげれば、https://reactjs.org/docs/lifting-state-up.html　のようにstateをシンクさせる機能を実装できる。
+### Redux
+- `ActionCreator`のメソッドに入力内容が渡されて、`Actionのオブジェクト`を作成する
+- Action：`typeプロパティ`を必ず持つ
+- ActionCreator：`Actionを作るのみ`を行いStoreへのdispatchは行わない
+- `Storeのインスタンスにdispatch(action)を行なう`事でStoreへ変更を伝えます(このdispatchはで行う)
+- Store: アプリケーションの状態(state)を保持
+    - stateへアクセスするためのgetState()を提供
+    - stateを更新するためのdispatch(action)を提供
+    - リスナーを登録するためのsubscribe(listener)を提供
