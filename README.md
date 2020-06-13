@@ -65,3 +65,23 @@ this.setState((state, props) => ({
     - stateへアクセスするためのgetState()を提供
     - stateを更新するためのdispatch(action)を提供
     - リスナーを登録するためのsubscribe(listener)を提供
+- `dispatchされたaction`と、`state`を`Reducer`へ渡す（Store = state + Reducer）
+- reducerはactionとstateから、新しいstateを作成して返すメソッド。ポイントは、`引数のstateを更新することはせず、新しいstateのオブジェクトを作成して返す`。
+- Reducerの実装は、actionのtypeに応じて処理を書く
+- Reducerはアプリケーションが大きくなるにつれて実装が肥大化してしまうので、`Reducer内に子Reducerを作成し、stateのプロパティごとに子Reducerで処理する`ようにする。
+- Reducerが作成した新しいstateをstoreが保存
+#### More technical staff
+- `createStore` にはReducer とデータの初期値を渡す
+```javascript
+const reducer = () => {
+  console.log("reducer has been called.");
+}
+const store = createStore(reducer, 1);
+```
+- Store が変更された時に呼ばれる`subscribe メソッド`とStore にAction を送信するdispatch メソッド
+```javascript
+store.subscribe(() => {
+  console.log("store changed", store.getState());
+});
+store.dispatch({type: "INC"});
+```
