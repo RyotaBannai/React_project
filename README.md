@@ -85,3 +85,21 @@ store.subscribe(() => {
 });
 store.dispatch({type: "INC"});
 ```
+- dispatch をしてreducerが更新を行うと前の状態も更新してしまう：
+> これは1 回目のuserReducer でreturn しているオブジェクトと2 回目のuserReducer でreturn しているオブジェクトが完全に同一のオブジェクトであるため、かつJavaScript の非同期性の特性からstore.subscribe 内にあるconsole.log が呼ばれる時点で、user とage が既に設定されてしまっている、完全に同じオブジェクトを出力してしまうわけです。そのため、1 回目のuserReducer と2 回目のuserReducer で完全に異なるオブジェクトを返してあげるようにすればこの問題は解決します。ではどのようにすれば、1 回目と2 回目で異なるオブジェクトを返せるようになるかと言うと、先程説明した`immutable なJavaScript が答え`になってきます。 Object に値を設定する時に`Object.assign` もしくはES6 の記法を使うのであれば{...state, name: action.payload}のような記法（`スプレッド構文`）を使ってやれば良い
+- 二つ以上のreducerを使いたいときは、`combineReducers`を使う。複数の`dispatch` は`シーケンシャルに呼ばれる`
+- `Redux middleware`: `reducer を呼ぶ前に処理を幾つか追加したい`時に使う。REST API で動いているバックエンドから、`reducer で処理するためのJSON データを取得`してきたり、`reducer の処理に入る前後にログを出力`したりといった処理
+
+```javascript
+const logger = (store) => (next) => (action) => {
+  console.log("action fired", action);
+}
+// ↓　↓　↓
+function logger(store) {
+  return function (next) {    /* 無名関数 */
+    return function (action) {    /* 無名関数 */
+      console.log("action fired", action);
+    }
+  }
+}
+```

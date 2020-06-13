@@ -28,7 +28,7 @@ function Footer (){
             <Link to="/archives">
                 <button className="btn btn-danger">archives</button>
             </Link>
-            <Link to="/archives/some-other-articles" class="btn btn-warning">archives (some other
+            <Link to="/archives/some-other-articles" className="btn btn-warning">archives (some other
                 articles)</Link>
             <Link to="/settings?name=netflix">
                 <button className="btn btn-success">settings</button>

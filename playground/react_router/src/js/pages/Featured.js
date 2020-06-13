@@ -34,7 +34,7 @@ export default class Featured extends React.Component {
     }
     es6Function = (value) => { // 2019 Update with react 16+ and ES6
         console.log(value)
-    }
+    };
     deleteArticle(article_id) {
         console.log('wanna delete...');
         this.setState((state, props) => ({
