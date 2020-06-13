@@ -13,8 +13,12 @@ module.exports = {
       use: [{
         loader: 'babel-loader',
         options: {
-          plugins: ['react-html-attrs', '@babel/plugin-proposal-class-properties'],
-          presets: ['@babel/preset-react', '@babel/preset-env']
+          plugins: [
+              'react-html-attrs',
+            [require('@babel/plugin-proposal-class-properties'), {legacy: true}],
+            [require('@babel/plugin-proposal-decorators'), {legacy: true}]
+          ],
+          presets: ['@babel/preset-react', '@babel/preset-env'],
         }
       }]
     },
