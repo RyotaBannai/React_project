@@ -104,3 +104,16 @@ function logger(store) {
 }
 ```
 - `redux-thunk`: Redux のmiddleware で、`Action オブジェクトの代わりに関数を返す処理を呼び出す`ことができるようにするためのミドルウェア。thunk はstore のdispatch メソッドを受け取り、`Action オブジェクトの代わりに渡された非同期関数処理が完了した後に通常の同期処理アクションをディスパッチする`（つまりaxiosなどでjsonオブジェクトを取得してからその後にdispatchするようなことにも使える）ために利用される。
+#### Connect React and Redux
+- `client.js`のrenderの一番外を`Provider`コンポネントでラップ
+- `client.js とは別のコンポーネントでRedux を利用するにはconnect をimport して利用する`
+```javascript
+//node server
+node << EOF
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+  setTimeout(() => res.end('{"age": "30", "id": 0, "name": "foo", "age": 25, "id": 1, "name": "bar"}'), 1000);
+}).listen(18081);
+EOF
+```

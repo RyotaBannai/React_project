@@ -4,8 +4,6 @@ import { createLogger } from "redux-logger";
 import { createPromise } from 'redux-promise-middleware';
 import reducers from './reducers'
 
-
-
 // const _logger = (store) => (next) => (action) => {
 //     //console.log("action fired", action);
 //     console.log(action);
@@ -21,5 +19,6 @@ import reducers from './reducers'
 // const middleware = applyMiddleware(_logger, _error);
 
 const middleware = applyMiddleware(thunk, createLogger());
+//const middleware = applyMiddleware(thunk);
 let initialState = { user: { name: "Anonymous", age: 0 }, tweets: [], fetched_user:[] };
 export default createStore(reducers, initialState, middleware);
