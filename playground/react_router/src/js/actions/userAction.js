@@ -1,14 +1,6 @@
+import { createActions } from 'redux-actions';
+const {  changeName, changeAge } = createActions('CHANGENAME', 'RECEIVEUSERS', 'FETCHERROR');
 export default {
-    changeName: function (name) {
-        return {
-            type: "CHANGE_NAME",
-            payload: name
-        };
-    },
-    changeAge: function (age){
-        return {
-            type: "CHANGE_AGE",
-            payload: age
-        };
-    }
+    changeName: changeName,
+    changeAge: changeAge,
 }

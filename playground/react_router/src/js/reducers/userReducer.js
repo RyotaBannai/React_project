@@ -1,13 +1,13 @@
-export default function reducer (state = {}, action) {
-    switch(action.type) {
-        case "CHANGE_NAME":
-            state = {...state, name: action.payload};
-            break;
-        case "CHANGE_AGE":
-            state = {...state, age: action.payload};
-            break;
-        case "ERR":
-            throw new Error("It's error!!!!");
-    }
-    return state;
-};
+import { handleActions } from 'redux-actions';
+import actions from '../actions/userAction'
+
+const {changeName, changeAge} = actions;
+let initialState = [
+    { name: "Anonymous", age: 0 },
+];
+export default handleActions({
+    [changeName]: () => ({...state, name: action.payload}),
+    [changeAge]: (state, action) => ({...state, age: action.payload})
+},
+    initialState
+);

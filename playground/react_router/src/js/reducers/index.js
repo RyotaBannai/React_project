@@ -1,13 +1,12 @@
 import {combineReducers} from "redux";
-import tweets from './tweetReducer'
 import user from './userReducer'
 import fetched_user from './fetchUserReducer'
 
-export default combineReducers({
-    tweets,
+const reducers = {
     user,
     fetched_user,
-});
+};
+export default combineReducers(reducers);
 
 
 

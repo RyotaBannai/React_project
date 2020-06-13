@@ -1,8 +1,7 @@
 import React, {Fragment} from "react";
 import { connect } from "react-redux";
-import actions from '../actions'
+import fetchUserActions from "../actions/fetchUserAction"
 import axios from "axios";
-
 
 // storeが管理するstateを props として受け取るための変換函数
 function mapStateToProps(state, props) {
@@ -17,16 +16,10 @@ function mapDispatchToProps(dispatch, props) {
     return {
         fetcherUser: function () {
             dispatch(_dispatch => axios
-                .get(endpoint).then((response) => this.getUser(response.data))
-                .catch((err) => this.threwError(err) )
+                .get(endpoint).then((response) => dispatch(fetchUserActions.getUser(response.data)))
+                .catch((err) => dispatch(fetchUserActions.threwError(err)))
             )
         },
-        getUser: function(res) {
-            dispatch(actions.fetch_user.getUser(res));
-        },
-        threwError: function(err){
-            dispatch(actions.fetch_user.threwError(err));
-        }
     };
 }
 

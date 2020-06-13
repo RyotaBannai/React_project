@@ -1,12 +1,12 @@
-export default function reducer (state = [], action) {
-    switch (action.type) {
-        case "FETCH_USERS_START":
-            break;
-        case "FETCH_USERS_ERROR":
-            break;
-        case "RECEIVE_USERS":
-            state = state.concat(action.payload);
-            break;
-    }
-    return state;
-};
+import { handleActions } from 'redux-actions';
+import actions from '../actions/fetchUserAction'
+
+const {startFetch, getUser, threwError} = actions;
+let initialState = [];
+export default handleActions({
+        [startFetch]: () => 'Starts fetching...',
+        [getUser]: (state, action) => state.concat(action.payload),
+        [threwError]: (state, action) => `Error fetchUserReducer@${action.type}`,
+    },
+    initialState
+);
