@@ -103,3 +103,4 @@ function logger(store) {
   }
 }
 ```
+- `redux-thunk`: Redux のmiddleware で、`Action オブジェクトの代わりに関数を返す処理を呼び出す`ことができるようにするためのミドルウェア。thunk はstore のdispatch メソッドを受け取り、`Action オブジェクトの代わりに渡された非同期関数処理が完了した後に通常の同期処理アクションをディスパッチする`（つまりaxiosなどでjsonオブジェクトを取得してからその後にdispatchするようなことにも使える）ために利用される。

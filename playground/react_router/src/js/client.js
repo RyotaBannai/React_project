@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { applyMiddleware, combineReducers, createStore } from "redux";
+import thunk from "redux-thunk";
+import { createLogger } from "redux-logger";
+import axios from "axios";
 
 import Layout from "./pages/Layout";
 import Featured from "./pages/Featured";
@@ -23,42 +26,66 @@ const userReducer = (state = {}, action) => {
     return state;
 };
 
+const fetchUserReducer = (state = [], action) => {
+    switch (action.type) {
+        case "FETCH_USERS_START":
+            break;
+        case "FETCH_USERS_ERROR":
+            break;
+        case "RECEIVE_USERS":
+            state = state.concat(action.payload);
+            break;
+    }
+    return state;
+};
+
 const tweetsReducer = (state = [], action) => {
     switch(action.type) {
         case "ADD_TWEET":
-              state = state.concat({id: Date.now(), text: action.payload});
-          }
-      return state;
-};
-const _logger = (store) => (next) => (action) => {
-    //console.log("action fired", action);
-    console.log(action);
-    next(action); // laravel の middlewareと同じ原理 payloadも変更できる
-};
-const _error = (store) => (next) => (action) => {
-    try{
-        next(action);
-    } catch (e) {
-        console.log("Error was occured", e);
+            state = state.concat({id: Date.now(), text: action.payload});
     }
+    return state;
 };
-const middleware = applyMiddleware(_logger, _error);
+// const _logger = (store) => (next) => (action) => {
+//     //console.log("action fired", action);
+//     console.log(action);
+//     next(action); // laravel の middlewareと同じ原理 payloadも変更できる
+// };
+// const _error = (store) => (next) => (action) => {
+//     try{
+//         next(action);
+//     } catch (e) {
+//         console.log("Error was occured", e);
+//     }
+// };
+// const middleware = applyMiddleware(_logger, _error);
+
+const middleware = applyMiddleware(thunk, createLogger());
 const reducers = combineReducers({
     user: userReducer,
-    tweets: tweetsReducer
+    tweets: tweetsReducer,
+    fetched_user: fetchUserReducer,
 });
 
-let initialState = { user: { name: "Anonymous", age: 0 }, tweets: [] };
+let initialState = { user: { name: "Anonymous", age: 0 }, tweets: [], fetched_user:[] };
 const store = createStore(reducers, initialState, middleware);
 store.subscribe(() => {
-    console.log("store changed", store.getState());
+    //console.log("store changed", store.getState());
 });
 
-store.dispatch({type: "CHANGE_NAME", payload: 'Mike'});
-store.dispatch({type: "CHANGE_AGE", payload: 20});
-store.dispatch({type: "CHANGE_AGE", payload: 10});
-store.dispatch({type: "ADD_TWEET", payload: 'calling tweets reducer!'});
-store.dispatch({type: "ERR", payload: 'new tweets!'});
+store.dispatch((dispatch) => {
+    dispatch({type: "CHANGE_NAME", payload: 'Mike'});
+    dispatch({type: "ADD_TWEET", payload: 'calling tweets reducer!'});
+    // dispatch({type: "ERR", payload: 'new tweets!'});
+
+    dispatch({type: "FETCH_USERS_START"});
+    axios.get("http://localhost:18080").then((response) => {
+        dispatch({type: "RECEIVE_USERS", payload: response.data});
+    }).catch((err) => {
+        dispatch({type: "FETCH_USERS_ERROR", payload: err});
+    });
+});
+
 
 const app = document.getElementById('app');
 
