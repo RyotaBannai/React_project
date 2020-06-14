@@ -104,9 +104,59 @@ function logger(store) {
 }
 ```
 - `redux-thunk`: Redux のmiddleware で、`Action オブジェクトの代わりに関数を返す処理を呼び出す`ことができるようにするためのミドルウェア。thunk はstore のdispatch メソッドを受け取り、`Action オブジェクトの代わりに渡された非同期関数処理が完了した後に通常の同期処理アクションをディスパッチする`（つまりaxiosなどでjsonオブジェクトを取得してからその後にdispatchするようなことにも使える）ために利用される。
+- `setState()` will always lead to a re-render `as long as an update is available` (`shouldComponentUpdate()`). 
+### HOC vs Render Prop vs Hook
+- `Higher Order Components` (or HOCs): components created to `wrap another component` and expand their logic with extra code. If that sounds familiar, that’s because it is `similar to decorator pattern` used extensively in Mobx. Many languages like Python have decorators in-built and JavaScript is going to support decorators soon. HOCs are very much like decorators.
+```javascript
+// HOC
+const withDataProvider = (Wrapped, {firstName, lastName }) =>
+  class Random extends React.Component {
+    fullName = firstname + " " + lastName
+
+    render = () => {
+      return <Wrapped fullName={this.fullName} {...this.props}/>;
+    }
+  };
+
+const ConsumingComp = props => <h1>Hello {props.fullName}</h1>;
+
+const Comp = withDataProvider(ConsumingComp, {firstName: "First", lastName: "Last"});
+
+<Comp />
+
+// Render Props
+const DataProvider = props => 
+    props.children(props.firstName + " " + props.lastName)
+ 
+
+const ConsumingComp = () => (
+    <DataProvider firstName="First" lastName= "Last" render={fullName => (
+        <h1>Hello {fullName}</h1>
+    )}/>
+)
+
+// Hooks
+const useDataProvider = (firstName, lastName) => {
+    return firstName + " " + lastName
+}
+
+const ConsumingComp = () => {
+    const fullName = useDataProvider("First", "Last")
+
+    return <h1>Hello {fullName}</h1>
+}
+```
+- [Reference - hoc renderprop hook](https://sophieau.com/article/hoc-renderprop-hook/)
+- [Understanding React Render Props and HOC](https://blog.bitsrc.io/understanding-react-render-props-and-hoc-b37a9576e196)
+- [Will React Classes Get Deprecated Because of Hooks?](https://blog.bitsrc.io/will-react-classes-get-deprecated-because-of-hooks-bb62938ac1f5)
+- [React Context API — A Replacement for Redux?](https://blog.bitsrc.io/react-context-api-a-replacement-for-redux-6e20790492b3)
+### Context API
+- it lets you pass data through the component tree `without having to manually pass props at every level of the tree` even when not needed (prop drilling).
+- the React team recommends using it to “share data that can be considered `“global”` for `a tree of React components`, such as the `current authenticated user`, `theme`, or `preferred language`”
 #### Connect React and Redux
 - `client.js`のrenderの一番外を`Provider`コンポネントでラップ
 - `client.js とは別のコンポーネントでRedux を利用するにはconnect をimport して利用する`
+- redux-actions [reference](https://github.com/larkintuckerllc/hello-redux-actions)
 ```javascript
 //node server
 node << EOF
