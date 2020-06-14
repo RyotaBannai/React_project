@@ -105,7 +105,7 @@ function logger(store) {
 ```
 - `redux-thunk`: Redux のmiddleware で、`Action オブジェクトの代わりに関数を返す処理を呼び出す`ことができるようにするためのミドルウェア。thunk はstore のdispatch メソッドを受け取り、`Action オブジェクトの代わりに渡された非同期関数処理が完了した後に通常の同期処理アクションをディスパッチする`（つまりaxiosなどでjsonオブジェクトを取得してからその後にdispatchするようなことにも使える）ために利用される。
 - `setState()` will always lead to a re-render `as long as an update is available` (`shouldComponentUpdate()`). 
-### HOC vs Render Prop vs Hook
+### HOC vs Render Prop vs On Hooks
 - `Higher Order Components` (or HOCs): components created to `wrap another component` and expand their logic with extra code. If that sounds familiar, that’s because it is `similar to decorator pattern` used extensively in Mobx. Many languages like Python have decorators in-built and JavaScript is going to support decorators soon. HOCs are very much like decorators.
 ```javascript
 // HOC
@@ -135,7 +135,7 @@ const ConsumingComp = () => (
     )}/>
 )
 
-// Hooks
+// On Hooks
 const useDataProvider = (firstName, lastName) => {
     return firstName + " " + lastName
 }
@@ -149,6 +149,9 @@ const ConsumingComp = () => {
 - [Reference - hoc renderprop hook](https://sophieau.com/article/hoc-renderprop-hook/)
 - [Understanding React Render Props and HOC](https://blog.bitsrc.io/understanding-react-render-props-and-hoc-b37a9576e196)
 - [Will React Classes Get Deprecated Because of Hooks?](https://blog.bitsrc.io/will-react-classes-get-deprecated-because-of-hooks-bb62938ac1f5)
+### On Hooks
+- フックを利用することで、ライフサイクルメソッドの場合は分離して書かざるを得なかったコンポーネント内の副作用を、関連する部分（リソースの購読とその解除、など）同士で整理して記載することが可能になる。
+- React のライフサイクルに馴染みがある場合は、useEffect フックを componentDidMount と componentDidUpdate と componentWillUnmount がまとまったものだと考えることができます。
 ### Context API
 - it lets you pass data through the component tree `without having to manually pass props at every level of the tree` even when not needed (prop drilling).
 - the React team recommends using it to “share data that can be considered `“global”` for `a tree of React components`, such as the `current authenticated user`, `theme`, or `preferred language`”
