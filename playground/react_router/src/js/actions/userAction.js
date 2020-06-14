@@ -1,6 +1,6 @@
 import { createActions } from 'redux-actions';
-const {  changeName, changeAge } = createActions('CHANGENAME', 'RECEIVEUSERS', 'FETCHERROR');
+const {  changename, changeage } = createActions('CHANGENAME', 'CHANGEAGE');
 export default {
-    changeName: changeName,
-    changeAge: changeAge,
+    changeName: changename,
+    changeAge: changeage,
 }
