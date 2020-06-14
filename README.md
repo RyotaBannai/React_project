@@ -149,7 +149,6 @@ const ConsumingComp = () => {
 - [Reference - hoc renderprop hook](https://sophieau.com/article/hoc-renderprop-hook/)
 - [Understanding React Render Props and HOC](https://blog.bitsrc.io/understanding-react-render-props-and-hoc-b37a9576e196)
 - [Will React Classes Get Deprecated Because of Hooks?](https://blog.bitsrc.io/will-react-classes-get-deprecated-because-of-hooks-bb62938ac1f5)
-- [React Context API — A Replacement for Redux?](https://blog.bitsrc.io/react-context-api-a-replacement-for-redux-6e20790492b3)
 ### Context API
 - it lets you pass data through the component tree `without having to manually pass props at every level of the tree` even when not needed (prop drilling).
 - the React team recommends using it to “share data that can be considered `“global”` for `a tree of React components`, such as the `current authenticated user`, `theme`, or `preferred language`”
