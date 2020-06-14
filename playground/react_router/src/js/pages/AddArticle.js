@@ -1,22 +1,17 @@
 import React from "react";
 
-export default class AddArticlef extends React.Component {
+export default class AddArticle extends React.Component {
     constructor() {
         super();
         this.state = {
             value: 'default'
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleChange(event) {
-        //console.log(event.target.value)
-        this.setState({value: event.target.value});
-    }
-    handleSubmit(event) {
+    handleChange = event => this.setState({value: event.target.value});
+    handleSubmit = event => { // 2019 Update with react 16+ and ES6
         alert('A name was submitted: ' + this.state.value);
         event.preventDefault();
-    }
+    };
     render() {
         return <div>
             <h1>Write new article</h1>
@@ -32,7 +27,7 @@ export default class AddArticlef extends React.Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="content">Example textarea</label>
-                        <textarea className="form-control" id="content" rows="3"></textarea>
+                        <textarea className="form-control" id="content" rows="3" />
                     </div>
                     <div className="form-group">
                         <div >

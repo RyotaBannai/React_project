@@ -7,7 +7,6 @@ export default class Featured extends React.Component {
         this.state = {
             articles: [],
         };
-        this.deleteArticle = this.deleteArticle.bind(this);
     }
     componentDidMount() {
         // document.title = `You clicked ${this.state.count} times`;
@@ -32,15 +31,12 @@ export default class Featured extends React.Component {
             articles: articles
         });
     }
-    es6Function = (value) => { // 2019 Update with react 16+ and ES6
-        console.log(value)
-    };
-    deleteArticle(article_id) {
+    deleteArticle = article_id => {
         console.log('wanna delete...');
         this.setState((state, props) => ({
             articles: state.articles.filter(article => article.key !== article_id),
         }));
-    }
+    };
     Counter (initial_count = 0) {
         let _uuid = initial_count;
         Object.defineProperty(this,"uuid", {
