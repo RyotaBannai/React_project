@@ -6,6 +6,9 @@ module.exports = {
   context: path.join(__dirname, "src"),
   entry: "./js/client.js",
   devtool: debug ? "inline-sourcemap" : false,
+  resolve: {
+    modules: [path.resolve(__dirname, '../../node_modules'), 'node_modules']
+  },
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -14,11 +17,11 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           plugins: [
-            ['@babel/plugin-proposal-decorators', {"legacy": true}],
-            ['@babel/plugin-proposal-class-properties', { "loose": true }],
+            [require('@babel/plugin-proposal-decorators'), {"legacy": true}],
+            [require('@babel/plugin-proposal-class-properties'), { "loose": true }],
             'react-html-attrs',
           ],
-          presets: ['@babel/preset-react', '@babel/preset-env'],
+          presets: [require('@babel/preset-react'), require('@babel/preset-env')],
         }
       }]
     },
