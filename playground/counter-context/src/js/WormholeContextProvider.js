@@ -1,16 +1,15 @@
 import React, {createContext, useState, useEffect} from 'react';
 
 const defaultState = {
-    sharedCount: 0
+    sharedCount: 0,
+    randomVal: 'string'
 };
-
 export const WormholeContext = createContext({
     state: defaultState,
     dispatch: () => {}
 });
-
-export const WormholeContextProvider = (props) => {
-    const [state, setState] = useState(defaultState);
+export const WormholeContextProvider = ({children}) => {
+    const [state, setState] = useState(defaultState); // state = {sharedCount}
     const [contextValue, setContextValue] = useState({
         state,
         setSharedCount: sharedCount =>
@@ -19,17 +18,17 @@ export const WormholeContextProvider = (props) => {
                 sharedCount
             }))
     });
-
-    useEffect(()=>{
+    useEffect(() => {
         setContextValue(contextValue=> ({
-            contextValue,
+            ...contextValue,
             state,
-        }))
+        }));
+        console.log(contextValue);
     }, [state]);
 
     return (
         <WormholeContext.Provider value={contextValue}>
-            {props.children}
+            {children}
         </WormholeContext.Provider>
     );
 };

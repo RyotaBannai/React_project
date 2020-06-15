@@ -1,5 +1,8 @@
 import React, {useState, useEffect, useContext} from "react";
-import {WormholeContextProvider, WormholeContext} from '../WormholeContextProvider'
+import {
+    WormholeContextProvider,
+    WormholeContext,
+} from '../WormholeContextProvider'
 
 const Display = ({count}) => {
     return (
@@ -13,7 +16,7 @@ const RedButton = ({setState}) => {
     )
 };
 const Counter = ({start = 0}) => {
-    const [state, setSharedCount] = useContext(WormholeContext);
+    const {state, setSharedCount} = useContext(WormholeContext);
     // let plusOne = _ => setCount(count+1); // what difference.
     let plusOne = _ => setSharedCount(state.sharedCount+1);
     return (<div>
@@ -28,6 +31,7 @@ const Counter = ({start = 0}) => {
 export const CounterPage = props => {
     return (<div>
         <WormholeContextProvider>
+            <Counter/>
             <Counter/>
         </WormholeContextProvider>
     </div>)
