@@ -175,3 +175,4 @@ EOF
 - state2 の中に他のstate1を更新するためのsetState1関数（名前は任意）を入れることができる。つまり、setState1関数を呼ぶことでstate1を更新し、この更新をトリガーにstate2を更新することができる。こうしてstate2をシェアしてるコンポネントはデータを同期することができる。
 - これらの動きはreduxやmobxの内部の動きである。
 - この際にstate2 に宣言するstate1を更新するための関数は特定のstate valueを受け取る。つまり、更新対象のvalue分の更新関数をstate2に追加しておく必要がある。
+- [reference](https://www.youtube.com/watch?v=OJ7ZDfQ4snc&lc=z22wdrj4rr3kyjrknacdp43aal0ftesf0behebhqu0xw03c010c)
