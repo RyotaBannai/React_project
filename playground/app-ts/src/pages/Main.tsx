@@ -7,7 +7,7 @@ interface Props {
 
 export const Main: React.FC<Props> = () => {
     return (<div>
-            <Count />
+            <Count message={'The Counter'}/>
         </div>
     )
 };
