@@ -10,6 +10,10 @@ interface Result {
     todos: State;
     dispatch: React.Dispatch<Action>
 }
+interface Delete {
+    id: number,
+    dispatch: React.Dispatch<Action>
+}
 type Action =
     {
         type: 'add',
@@ -36,7 +40,6 @@ function reducer(state: State, action: Action){
     }
 }
 
-
 // https://ultimatecourses.com/blog/typescript-setters-getter
 class Counter {
     constructor(private _uuid: number = 0){}
@@ -45,7 +48,7 @@ class Counter {
     }
 }
 
-const Display: React.FC<Result> = ({todos, dispatch})=> {
+const Display: React.FC<Result> = ({todos, dispatch}) => {
     const counter = new Counter();
     return (
         <>
@@ -55,22 +58,27 @@ const Display: React.FC<Result> = ({todos, dispatch})=> {
                     let id = counter.uuid;
                     return <div key={id}>
                         <span>{todo.todo}{' '}</span>
-                        <Button
-                            type="submit"
-                            variant="primary"
-                            size="sm"
-                            onClick={
-                                (e: SyntheticEvent): void => {
-                                    e.preventDefault();
-                                    dispatch({type: 'remove', index: id});
-                                }
-                            }
-                        >Delete</Button>
+                        <RemoveButton id={id} dispatch={dispatch}/>
                     </div>
                 })
-                }</div>
+                }
+            </div>
         </>
     )
+};
+
+const RemoveButton: React.FC<Delete> = ({id, dispatch}) => {
+    return <Button
+        type="submit"
+        variant="primary"
+        size="sm"
+        onClick={
+            (e: SyntheticEvent): void => {
+                e.preventDefault();
+                dispatch({type: 'remove', index: id});
+            }
+        }
+    >Delete</Button>
 };
 
 export const Todos: React.FC<Props> = ({ message }) => {
