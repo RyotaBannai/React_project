@@ -1,5 +1,5 @@
 import React from "react";
-import { Count } from '../organisms/Count'
+import { Todos } from '../organisms/Todos'
 
 interface Props {
 
@@ -7,7 +7,7 @@ interface Props {
 
 export const Main: React.FC<Props> = () => {
     return (<div>
-            <Count message={'The Counter'}/>
+            <Todos message={'Todo List'}/>
         </div>
     )
 };

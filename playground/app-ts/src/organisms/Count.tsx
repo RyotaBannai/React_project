@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef, useReducer, SyntheticEvent} from "react";
 import Button from "react-bootstrap/Button";
 // import { fromEvent } from 'rxjs';
 // import { find } from 'rxjs/operators';
@@ -23,7 +23,7 @@ export const Count: React.FC<Props> = ({ message }) => {
     const [count, setCount] = useState<number>(0);
 
     // const inputRef = useRef<HTMLInputElement | null>(null);
-    const increase = (event: any) => {
+    const increase = (event: SyntheticEvent): void =>  {
         setCount(currentCount => currentCount + 1);
     };
   return (
