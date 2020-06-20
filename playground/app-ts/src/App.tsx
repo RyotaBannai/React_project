@@ -5,18 +5,21 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import { Template } from './templates/Template'
 import { Main } from "./pages/Main";
-
+import { Provider } from "react-redux";
+import {store} from './organisms/Count001'
 
 function App() {
   return (
-    <div className="App">
-        <Router>
-            <Template>
-                <Route exact path="/" component={ Main } />
-            </Template>
-        </Router>
+      <Provider store={store}>
+            <div className="App">
+                <Router>
+                    <Template>
+                        <Route exact path="/" component={ Main } />
+                    </Template>
+                </Router>
 
-    </div>
+            </div>
+      </Provider>
   );
 }
 
