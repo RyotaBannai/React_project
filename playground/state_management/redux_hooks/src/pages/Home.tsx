@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useRef, useEffect, useState } from "react";
 import { List } from "../components/List";
-import { MovieType } from "../types/Movie";
 import styled from "styled-components";
 import lightGreen from "@material-ui/core/colors/lightGreen";
 
@@ -9,7 +8,7 @@ export const Home: FC<Props> = (props) => {
   const [term, setTerm] = useState<string>("sf");
   //   const items = useSearch(term);
   const [movies, setMovies] = useState(items);
-  const addMovie = (movie: MovieType) => setMovies([...movies, movie]);
+  const addMovie = (movie: Movie.MovieType) => setMovies([...movies, movie]);
   const handleClick = useCallback(
     (item) => {
       console.log(movies);
@@ -27,7 +26,7 @@ export const Home: FC<Props> = (props) => {
   );
 };
 
-const items: MovieType[] = [
+const items: Movie.MovieType[] = [
   {
     id: 0,
     data: {

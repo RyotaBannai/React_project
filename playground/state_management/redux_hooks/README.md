@@ -119,3 +119,31 @@ declare module "styled-components" {
 ```
 
 - [ref](https://qiita.com/Ouvill/items/c6761c32d31ffb11e114#%E3%81%95%E3%82%89%E3%81%AB%E6%80%A0%E6%83%B0%E3%81%AB%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AA%E3%83%B3%E3%82%B0)
+
+- 子コンポーネントに `dispatch` を渡す場合、`useCallback` を利用して、メモ化する: 親の再レンダリングによって子コンポーネントが不必要に再レンダリングされることを回避するため
+
+```javascript
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
+
+export const CounterComponent = ({ value }) => {
+  const dispatch = useDispatch();
+  const incrementCounter = useCallback(
+    () => dispatch({ type: "increment-counter" }),
+    [dispatch]
+  );
+
+  return (
+    <div>
+      <span>{value}</span>
+      <MyIncrementButton onIncrement={incrementCounter} />
+    </div>
+  );
+};
+
+export const MyIncrementButton = React.memo(({ onIncrement }) => (
+  <button onClick={onIncrement}>Increment counter</button>
+));
+```
+
+- [ref](https://qiita.com/Ouvill/items/569384e5c8c7ce78f98e)

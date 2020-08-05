@@ -9,7 +9,7 @@ export const AppRoute: FC<Props> = () => {
     <Router>
       <Layout>
         <Suspense fallback={<div>Loading...</div>}>
-          <Route exact path="/" component={Home} />
+          <Route path="/" component={Home} />
         </Suspense>
       </Layout>
     </Router>
