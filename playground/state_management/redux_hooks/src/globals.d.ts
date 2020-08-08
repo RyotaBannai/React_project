@@ -1,4 +1,7 @@
 declare namespace Count {
+  interface CounterSliceFeature {
+    counter: CounterState;
+  }
   interface CounterState {
     count: number;
   }

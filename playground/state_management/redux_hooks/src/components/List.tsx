@@ -1,6 +1,6 @@
 import React, { FC, useRef, useEffect, SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useCountAction } from "../store/actions/countActions";
+import { useCount } from "../store/features/countFeatureSlice";
 import {
   Button,
   Grid,
@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import styled from "styled-components";
 
-const countSelector = (state: Count.CounterState) => state.count;
+const countSelector = (state: Count.CounterSliceFeature) => state.counter.count;
 
 interface Props {
   items: Movie.MovieType[];
@@ -18,9 +18,9 @@ interface Props {
   addMovie: (movie: Movie.MovieType) => void;
 }
 const _List: FC<Props> = ({ items, handleClick, addMovie }) => {
-  const { increment, decrement } = useCountAction();
   const dispatch = useDispatch();
   const counter = useSelector(countSelector);
+  const { increment, decrement} = useCount();
 
   const refInput = useRef(null);
   const map = (item: Movie.MovieType, index: number) => (
@@ -41,6 +41,7 @@ const _List: FC<Props> = ({ items, handleClick, addMovie }) => {
   };
   useEffect(() => {
     // do something
+    console.log(counter)
   }, []);
 
   return (
